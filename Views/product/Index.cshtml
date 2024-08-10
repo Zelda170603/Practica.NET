@@ -1,0 +1,31 @@
+@model IEnumerable<dotnetproyect.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <h3>Lista de productos</h3>
+    @foreach (var producto in Model)
+    {
+        <div class="bg-white text-gray-800 dark:bg-gray-700 dark:text-white p-4 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold">@producto.Nombre</h2>
+            <img src="@Url.Content("~/images/productos/" + producto.foto)" alt="Foto de @producto.Nombre"
+                class="w-full h-auto object-cover rounded-lg shadow-md mt-2">
+            <p class="mt-2"><strong>Descripción:</strong> @producto.Descripcion</p>
+            <p><strong>Existencias:</strong> @producto.Existencia</p>
+            <p><strong>Tipo de Producto:</strong> @producto.Tipo_prod</p>
+            <p><strong>Fabricante:</strong> @producto.Fabricante.nombre</p>
+            <div class="flex justify-between mt-4">
+                <a href="@Url.Action("Edit", "Products", new { id = producto.Id })"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Editar
+                </a>
+                <button class="add-to-cart bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                    data-product-id="@producto.Id">
+                    Añadir al Carrito
+                </button>
+                <a asp-action="Delete" asp-route-id="@producto.Id">Eliminar</a>
+            </div>
+        </div>
+    }
+</div>
