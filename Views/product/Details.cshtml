@@ -1,0 +1,73 @@
+@model dotnetproyect.Models.Product
+
+@{
+    ViewData["Title"] = "Detalles del Producto";
+}
+
+<main class="p-4 mt-14">
+    <div class="rounded-lg shadow-lg overflow-hidden bg-white dark:bg-gray-800">
+        <div class="text-slate-900 dark:text-white p-4">
+            <h1 class="text-2xl font-bold mb-4">Detalles del Producto</h1>
+            <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-8">
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">
+                        @Html.DisplayFor(model => model.Nombre)
+                    </dd>
+                </div>
+
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">
+                        @Html.DisplayFor(model => model.Descripcion)
+                    </dd>
+                </div>
+
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        @Html.DisplayNameFor(model => model.Existencia)
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">
+                        @Html.DisplayFor(model => model.Existencia)
+                    </dd>
+                </div>
+
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        @Html.DisplayNameFor(model => model.Tipo_prod)
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">
+                        @Html.DisplayFor(model => model.Tipo_prod)
+                    </dd>
+                </div>
+
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        @Html.DisplayNameFor(model => model.Fabricante.correo)
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">
+                        @Html.DisplayFor(model => model.Fabricante.correo)
+                    </dd>
+                </div>
+
+                <div class="col-span-1 sm:col-span-2">
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        @Html.DisplayNameFor(model => model.foto)
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">
+                        <img src="~/images/productos/@Model.foto" alt="Imagen del producto" class="w-32 h-32 object-cover rounded-lg">
+                    </dd>
+                </div>
+            </dl>
+        </div>
+        <div class="p-4 flex justify-end space-x-4">
+            <a asp-action="Edit" asp-route-id="@Model?.Id"
+               class="bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700">Editar</a>
+            <a asp-action="Index" class="bg-gray-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-700">Volver a la Lista</a>
+        </div>
+    </div>
+</main>

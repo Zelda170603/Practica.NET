@@ -11,48 +11,57 @@
         </div>
         <div class="p-4">
             <form asp-action="Create" method="post" enctype="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="mb-4 text-red-500"></div>
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-
                     <div class="mb-5">
-                        <label asp-for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                        <input asp-for="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <label asp-for="nombre"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+                        <input asp-for="nombre"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         <span asp-validation-for="nombre" class="text-red-500 text-sm"></span>
                     </div>
 
                     <div class="mb-5">
-                        <label asp-for="ubicacion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ubicación</label>
-                        <input asp-for="ubicacion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <label asp-for="ubicacion"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ubicación</label>
+                        <input asp-for="ubicacion"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         <span asp-validation-for="ubicacion" class="text-red-500 text-sm"></span>
                     </div>
 
                     <div class="mb-5">
-                        <label asp-for="direccion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dirección</label>
-                        <input asp-for="direccion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <label asp-for="direccion"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dirección</label>
+                        <input asp-for="direccion"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         <span asp-validation-for="direccion" class="text-red-500 text-sm"></span>
                     </div>
 
                     <div class="mb-5">
-                        <label asp-for="correo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
-                        <input asp-for="correo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <label asp-for="correo"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
+                        <input asp-for="correo"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         <span asp-validation-for="correo" class="text-red-500 text-sm"></span>
                     </div>
 
                     <div class="mb-5">
-                        <label asp-for="telefono" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono</label>
-                        <input asp-for="telefono" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <label asp-for="telefono"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono</label>
+                        <input asp-for="telefono"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         <span asp-validation-for="telefono" class="text-red-500 text-sm"></span>
                     </div>
 
                     <div class="mb-5">
-                        <label asp-for="descripcion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
-                        <input asp-for="descripcion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                        <label asp-for="descripcion"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
+                        <input asp-for="descripcion"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         <span asp-validation-for="descripcion" class="text-red-500 text-sm"></span>
                     </div>
 
                     <div class="flex items-center justify-center w-full">
-                        <label for="foto_fab"
+                        <label asp-for="foto"
                             class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                             <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                 <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -66,9 +75,9 @@
                                 <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX.
                                     800x400px)</p>
                             </div>
-                            <input asp-for="foto_fab" id="foto_fab" name="foto_fab" type="file" class="hidden" />
+                            <input asp-for="foto" id="foto" name="foto" type="file" class="hidden" />
                         </label>
-                        <span asp-validation-for="foto_fab" class="text-red-500 text-sm"></span>
+                        <span asp-validation-for="foto" class="text-red-500 text-sm"></span>
                     </div>
 
                 </div>

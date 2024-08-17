@@ -64,7 +64,8 @@
                             @Html.DisplayFor(modelItem => item.descripcion)
                         </td>
                         <td class="px-6 py-4">
-                            @Html.DisplayFor(modelItem => item.foto_fab)
+                            <img src="~/images/Fabricantes/@item.foto_fab" alt="">
+                            
                         </td>
                         <td class="px-6 py-4 text-right">
                             <a asp-action="Edit" asp-route-id="@item.Id" class="text-blue-600 hover:text-blue-800">Editar</a> |

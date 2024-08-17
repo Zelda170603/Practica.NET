@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using dotnetproyect.Models;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace dotnetproyect.Controllers
 {
@@ -53,10 +54,26 @@ namespace dotnetproyect.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,nombre,ubicacion,direccion,correo,telefono,descripcion,foto_fab")] Fabricante fabricante)
+        public async Task<IActionResult> Create([Bind("Id,nombre,ubicacion,direccion,correo,telefono,descripcion,foto")] Fabricante fabricante)
         {
             if (ModelState.IsValid)
             {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/Fabricantes");
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+                string timestamps = DateTime.Now.ToString("yyyyMMddHHmmssffff");
+                var fileinfo = new FileInfo(fabricante.foto.FileName);
+                string filename = timestamps + fileinfo.Name + fileinfo.Extension;
+                string fileNameWITHpATH = Path.Combine(path, filename);
+
+                using (var stream = new FileStream(fileNameWITHpATH, FileMode.Create))
+                {
+                    fabricante.foto.CopyTo(stream);
+                }
+
+                fabricante.foto_fab = filename;
+
                 _context.Add(fabricante);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -85,7 +102,7 @@ namespace dotnetproyect.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,nombre,ubicacion,direccion,correo,telefono,descripcion,foto_fab")] Fabricante fabricante)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,nombre,ubicacion,direccion,correo,telefono,descripcion,foto_fab,foto")] Fabricante fabricante)
         {
             if (id != fabricante.Id)
             {
@@ -96,6 +113,30 @@ namespace dotnetproyect.Controllers
             {
                 try
                 {
+                    // Si se sube una nueva imagen, se procesa
+                    if (fabricante.foto != null)
+                    {
+                        string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/Fabricantes");
+                        // Elimina la imagen anterior si existe
+                        if (!string.IsNullOrEmpty(fabricante.foto_fab))
+                        {
+                            string existingFile = Path.Combine(path, fabricante.foto_fab);
+                            if (System.IO.File.Exists(existingFile))
+                            {
+                                System.IO.File.Delete(existingFile);
+                            }
+                        }
+                        // Guardar la nueva imagen
+                        string timestamps = DateTime.Now.ToString("yyyyMMddHHmmssffff");
+                        var fileinfo = new FileInfo(fabricante.foto.FileName);
+                        string filename = timestamps + fileinfo.Name + fileinfo.Extension;
+                        string fileNameWITHpATH = Path.Combine(path, filename);
+                        using (var stream = new FileStream(fileNameWITHpATH, FileMode.Create))
+                        {
+                            fabricante.foto.CopyTo(stream);
+                        }
+                        fabricante.foto_fab = filename;
+                    }
                     _context.Update(fabricante);
                     await _context.SaveChangesAsync();
                 }
@@ -114,6 +155,7 @@ namespace dotnetproyect.Controllers
             }
             return View(fabricante);
         }
+
 
         // GET: fabricante/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -140,12 +182,25 @@ namespace dotnetproyect.Controllers
             var fabricante = await _context.Fabricante.FindAsync(id);
             if (fabricante != null)
             {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/Fabricantes");
+
+                // Elimina la imagen del fabricante si existe
+                if (!string.IsNullOrEmpty(fabricante.foto_fab))
+                {
+                    string existingFile = Path.Combine(path, fabricante.foto_fab);
+                    if (System.IO.File.Exists(existingFile))
+                    {
+                        System.IO.File.Delete(existingFile);
+                    }
+                }
+
                 _context.Fabricante.Remove(fabricante);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool FabricanteExists(int id)
         {
