@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VVB2PwxoMfY9EQriiZfstR1MOPt6cQbp0FKkcK4vD9E=",
+  "Hash": "cmO1NehAc+/P8DZLLQHjWYxzwx36Mw9FBpQiDc6FyaY=",
   "Source": "dotnetproyect",
   "BasePath": "_content/dotnetproyect",
   "Mode": "Default",
@@ -1252,12 +1252,12 @@
       "OriginalItemSpec": "wwwroot\\images\\Fabricantes\\202408162114352309wallhaven-weve5q.jpg.jpg"
     },
     {
-      "Identity": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\images\\productos\\202408162138187904wallhaven-zy3l5o.jpg.jpg",
+      "Identity": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\images\\Fabricantes\\202408201333337099wallhaven-weve5q.jpg.jpg",
       "SourceId": "dotnetproyect",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\",
       "BasePath": "_content/dotnetproyect",
-      "RelativePath": "images/productos/202408162138187904wallhaven-zy3l5o.jpg.jpg",
+      "RelativePath": "images/Fabricantes/202408201333337099wallhaven-weve5q.jpg.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1268,15 +1268,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\productos\\202408162138187904wallhaven-zy3l5o.jpg.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\Fabricantes\\202408201333337099wallhaven-weve5q.jpg.jpg"
     },
     {
-      "Identity": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\images\\productos\\202408162141060737wallhaven-72eevv.jpg.jpg",
+      "Identity": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\images\\productos\\202408201334514832wallhaven-0plxj9.jpg.jpg",
       "SourceId": "dotnetproyect",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\",
       "BasePath": "_content/dotnetproyect",
-      "RelativePath": "images/productos/202408162141060737wallhaven-72eevv.jpg.jpg",
+      "RelativePath": "images/productos/202408201334514832wallhaven-0plxj9.jpg.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1287,7 +1287,26 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\productos\\202408162141060737wallhaven-72eevv.jpg.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\productos\\202408201334514832wallhaven-0plxj9.jpg.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\js\\dark-mode.js",
+      "SourceId": "dotnetproyect",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\",
+      "BasePath": "_content/dotnetproyect",
+      "RelativePath": "js/dark-mode.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\dark-mode.js"
     },
     {
       "Identity": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\js\\site.js",

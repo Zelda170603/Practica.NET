@@ -17,12 +17,16 @@
       "PackagePath": "staticwebassets\\images\\Fabricantes\\202408162114352309wallhaven-weve5q.jpg.jpg"
     },
     {
-      "Id": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\images\\productos\\202408162138187904wallhaven-zy3l5o.jpg.jpg",
-      "PackagePath": "staticwebassets\\images\\productos\\202408162138187904wallhaven-zy3l5o.jpg.jpg"
+      "Id": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\images\\Fabricantes\\202408201333337099wallhaven-weve5q.jpg.jpg",
+      "PackagePath": "staticwebassets\\images\\Fabricantes\\202408201333337099wallhaven-weve5q.jpg.jpg"
     },
     {
-      "Id": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\images\\productos\\202408162141060737wallhaven-72eevv.jpg.jpg",
-      "PackagePath": "staticwebassets\\images\\productos\\202408162141060737wallhaven-72eevv.jpg.jpg"
+      "Id": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\images\\productos\\202408201334514832wallhaven-0plxj9.jpg.jpg",
+      "PackagePath": "staticwebassets\\images\\productos\\202408201334514832wallhaven-0plxj9.jpg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\js\\dark-mode.js",
+      "PackagePath": "staticwebassets\\js\\dark-mode.js"
     },
     {
       "Id": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\js\\site.js",

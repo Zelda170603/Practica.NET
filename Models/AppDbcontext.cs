@@ -8,4 +8,5 @@ public class AppDbContext : IdentityDbContext<IdentityUser>{
     }
     public DbSet<Product> Product{ get; set;}
     public DbSet<Fabricante> Fabricante{ get; set;}
+    public DbSet<User> User{get; set;} 
 }
