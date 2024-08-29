@@ -1,17 +1,150 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using dotnetproyect.Models;
-
-namespace dotnetproyect.Controllers;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using dotnetproyect.Models; // Cambia esto al espacio de nombres adecuado
 
 public class AuthController : Controller
 {
-    public IActionResult login()
+    private readonly AppDbContext _context;
+    private readonly PasswordHasher<Usuario> _passwordHasher;
+
+    public AuthController(AppDbContext context)
+    {
+        _context = context;
+        _passwordHasher = new PasswordHasher<Usuario>();
+    }
+
+    // GET: /Auth/Register
+    [HttpGet]
+    public IActionResult Register()
     {
         return View();
     }
 
-    public IActionResult register(){
+    // GET: /Auth/Login
+    [HttpGet]
+    public IActionResult Login()
+    {
         return View();
     }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Register(string userName, string Apellido, string email, string password, IFormFile picture, string confirmPassword)
+    {
+        // Validaciones iniciales
+        if (password != confirmPassword)
+        {
+            ModelState.AddModelError(string.Empty, "Las contraseñas no coinciden.");
+            return View();
+        }
+
+        if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+        {
+            ModelState.AddModelError(string.Empty, "Todos los campos son obligatorios.");
+            return View();
+        }
+
+        try
+        {
+            // Verificar si el correo ya está registrado
+            if (_context.Usuario.Any(u => u.CorreoElectronico == email))
+            {
+                ModelState.AddModelError(string.Empty, "Este correo electrónico ya está registrado.");
+                return View();
+            }
+
+            string filename = null;
+
+            // Procesar la imagen de perfil si se ha subido
+            if (picture != null && picture.Length > 0)
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/profile_pictures");
+
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+                string timestamps = DateTime.Now.ToString("yyyyMMddHHmmssffff");
+                var fileinfo = new FileInfo(picture.FileName);
+                filename = timestamps + "_" + fileinfo.Name;
+
+                string filePath = Path.Combine(path, filename);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await picture.CopyToAsync(stream);
+                }
+            }
+
+            // Crear el nuevo usuario
+            var usuario = new Usuario
+            {
+                Nombre = userName,
+                Apellido = Apellido,
+                CorreoElectronico = email,
+                Contrasena = _passwordHasher.HashPassword(null, password),
+                FotoPerfil = filename // Guardar el nombre del archivo en la base de datos
+            };
+
+            _context.Usuario.Add(usuario);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Home");
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError(string.Empty, $"Error al registrar el usuario: {ex.Message}");
+            return View();
+        }
+    }
+
+
+    private async Task<string> SavePicture(IFormFile picture)
+    {
+        // Implementa la lógica para guardar la imagen y devolver la ruta o URL
+        // Por ejemplo:
+        var fileName = Path.GetFileName(picture.FileName);
+        var filePath = Path.Combine("wwwroot/images", fileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await picture.CopyToAsync(stream);
+        }
+
+        return $"/images/{fileName}";
+    }
+
+    // Método para el login
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Login(string email, string password)
+    {
+        if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+        {
+            var usuario = _context.Usuario.FirstOrDefault(u => u.CorreoElectronico == email);
+
+            if (usuario != null)
+            {
+                var passwordVerificationResult = _passwordHasher.VerifyHashedPassword(usuario, usuario.Contrasena, password);
+
+                if (passwordVerificationResult == PasswordVerificationResult.Success)
+                {
+
+                    HttpContext.Session.SetString("UserEmail", email);
+                    HttpContext.Session.SetString("UserName", usuario.Nombre);
+                    HttpContext.Session.SetString("UserFoto", usuario.FotoPerfil);
+                    
+
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            ModelState.AddModelError(string.Empty, "Correo o contraseña incorrectos.");
+        }
+
+        return View();
+    }
+
+
+
 }

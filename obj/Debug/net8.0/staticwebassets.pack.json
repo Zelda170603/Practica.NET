@@ -25,6 +25,18 @@
       "PackagePath": "staticwebassets\\images\\productos\\202408201334514832wallhaven-0plxj9.jpg.jpg"
     },
     {
+      "Id": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\images\\profile_picture\\202408262212030916wallhaven-wy9rx6.jpg.jpg",
+      "PackagePath": "staticwebassets\\images\\profile_picture\\202408262212030916wallhaven-wy9rx6.jpg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\images\\profile_picture\\202408262228163322wallhaven-72eevv.jpg.jpg",
+      "PackagePath": "staticwebassets\\images\\profile_picture\\202408262228163322wallhaven-72eevv.jpg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\images\\profile_pictures\\202408282303582734_wallhaven-weve5q.jpg",
+      "PackagePath": "staticwebassets\\images\\profile_pictures\\202408282303582734_wallhaven-weve5q.jpg"
+    },
+    {
       "Id": "C:\\Users\\anton\\Desktop\\Practica.NET\\wwwroot\\js\\dark-mode.js",
       "PackagePath": "staticwebassets\\js\\dark-mode.js"
     },

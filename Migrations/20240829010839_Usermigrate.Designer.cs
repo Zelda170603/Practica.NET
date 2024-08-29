@@ -12,7 +12,7 @@ using dotnetproyect.Models;
 namespace dotnetproyect.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240826183733_Usermigrate")]
+    [Migration("20240829010839_Usermigrate")]
     partial class Usermigrate
     {
         /// <inheritdoc />
@@ -300,7 +300,7 @@ namespace dotnetproyect.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("dotnetproyect.Models.User", b =>
+            modelBuilder.Entity("dotnetproyect.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -308,21 +308,56 @@ namespace dotnetproyect.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Contrasena")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("CorreoElectronico")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Direccion")
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<DateTime>("FechaNacimiento")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("FotoPerfil")
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<string>("Genero")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("correo")
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Rol")
                         .HasColumnType("longtext");
+
+                    b.Property<string>("Telefono")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("foto")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("password")
-                        .HasColumnType("longtext");
-
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

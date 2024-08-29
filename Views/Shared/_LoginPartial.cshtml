@@ -45,7 +45,13 @@
                     </form>
                 </div>
             </div>
-            @if (SignInManager.IsSignedIn(User))
+            @{
+                var userEmail = Context.Session.GetString("UserEmail");
+                var userName = Context.Session.GetString("UserName");
+                var userfoto = Context.Session.GetString("UserFoto");
+            }
+
+            @if (!string.IsNullOrEmpty(userName))
             {
                 <div class="flex gap-4 col-span-3 justify-end items-center">
                     <button type="button"
@@ -108,16 +114,17 @@
                         class="flex text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                         id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
                         <span class="sr-only">Open user menu</span>
-                        <img class="w-8 h-8 rounded-full" src="" alt="user photo" />
+                        <img class="w-8 h-8 rounded-full w-8 h-8 rounded-full"
+                            src="/images/profile_pictures/@userfoto" alt=" @userName"  />
                     </button>
                     <div class="hidden z-50 my-4 w-56 text-base list-none bg-white overflow-hidden divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
                         id="dropdown">
                         <div class="py-3 px-4">
                             <span class="block text-sm font-bold text-gray-900 dark:text-white">
-                                @UserManager.GetUserName(User) <!-- Nombre del usuario logueado -->
+                                @userName
                             </span>
                             <span class="block text-sm font-semibold text-gray-900 truncate dark:text-white">
-                                @(await UserManager.GetEmailAsync(await UserManager.GetUserAsync(User)))
+                                @userEmail
                             </span>
                         </div>
 
@@ -320,25 +327,25 @@
                                 </div>
                             </div>
                             <div class="flex flex-wrap font-bold items-center gap-x-1.5">
-                                <a href="@Url.Page("/Account/Register", new { area = "Identity" })"
+                                <a href="@Url.Action("Register", "Auth")"
                                     class="py-2 px-2.5 inline-flex items-center font-medium text-sm rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:bg-blue-600">
                                     Register
                                 </a>
-                                <a href="@Url.Page("/Account/Login", new { area = "Identity" })"
+                                <a href="@Url.Action("Login", "Auth")"
                                     class="py-[7px] px-2.5 inline-flex items-center font-medium text-sm rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 focus:outline-none focus:bg-gray-100 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                                     Login
                                 </a>
                             </div>
+
                             <!-- End Button Group -->
                         </div>
                     </div>
                 </div>
-
             }
         </div>
     </div>
 </nav>
-@if (SignInManager.IsSignedIn(User))
+@if (!string.IsNullOrEmpty(userName))
 {
     <partial name="_AsidePartial" />
 }

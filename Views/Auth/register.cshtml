@@ -1,51 +1,88 @@
+@{
+    ViewData["Title"] = "Register";
+}
+
 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
     <div
         class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1
                 class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Crea una cuenta
+                Register
             </h1>
-            <form class="space-y-4 md:space-y-6" action="" method="POST">
+            <form id="registerForm" method="post" enctype="multipart/form-data"
+                action="@Url.Action("Register", "Auth")">
+                 @Html.AntiForgeryToken()
+                @if (ViewData.ModelState.Values.Any(v => v.Errors.Count > 0))
+                {
+                    <div class="text-red-500" role="alert">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <p>@error.ErrorMessage</p>
+                        }
+                    </div>
+                }
 
                 <div>
-                    <label for="name"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                    <input type="text" name="name" id="name"
+                    <label for="UserName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre
+                        Completo</label>
+                    <input name="userName" id="UserName"
                         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Tu nombre" required value="">
+                        placeholder="your name here" type="text" required />
                 </div>
+                <div>
+                    <label for="Apellido" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellido</label>
+                    <input name="Apellido" id="Apellido"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="your name here" type="text" required />
+                </div>
+
                 <div>
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo
                         Electrónico</label>
-                    <input type="email" name="email" id="email"
+                    <input name="email" id="email"
                         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="name@company.com" required value="">
+                        placeholder="name@company.com" type="email" required />
                 </div>
+
                 <div>
                     <label for="password"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
-                    <input type="password" name="password" id="password" placeholder="••••••••"
+                    <input name="password" id="password" autocomplete="new-password" placeholder="••••••••"
                         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        required>
+                        type="password" required />
                 </div>
+
                 <div>
                     <label for="password_confirmation"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirma tu
                         Contraseña</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation"
+                    <input name="confirmPassword" id="password_confirmation" autocomplete="new-password"
                         placeholder="••••••••"
                         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        required>
+                        type="password" required />
                 </div>
+
+                <div class="flex flex-col items-center justify-start w-full">
+                    <label for="picture" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sube una
+                        imagen</label>
+                    <input name="picture"
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        aria-describedby="file_input_help" id="file_input" type="file" />
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG o GIF
+                        (MAX. 800x400px).</p>
+                </div>
+
                 <button type="submit"
                     class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Registrarse
                 </button>
+
                 <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                    ¿Ya tienes una cuenta? <a href="/Auth/login"
+                    ¿Ya tienes una cuenta? <a href="@Url.Action("Login", "Auth")"
                         class="font-medium text-blue-600 hover:underline dark:text-blue-500">Inicia sesión</a>
                 </p>
             </form>
+
         </div>
     </div>
 </div>
