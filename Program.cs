@@ -24,8 +24,9 @@ builder.Services.AddDistributedMemoryCache();
 // Configura las sesiones
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Tiempo de inactividad antes de que la sesión expire
+    options.IdleTimeout = TimeSpan.FromMinutes(1); // Tiempo de inactividad antes de que la sesión expire
     options.Cookie.HttpOnly = true; // Configura el cookie como HttpOnly para mayor seguridad
+     options.Cookie.IsEssential = true;
 });
 
 

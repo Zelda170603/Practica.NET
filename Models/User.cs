@@ -41,13 +41,15 @@ public class Usuario
     [StringLength(250)]
     public string? FotoPerfil { get; set; }
 
-    public string? Rol { get; set; }
-
-    public string? foto { get; set; }
-
     [NotMapped]
-    [Required(ErrorMessage ="Por favor seleccione un archivo")]
+    [Required(ErrorMessage = "Por favor seleccione un archivo")]
     public IFormFile? file { get; set; }
 
     public DateTime FechaRegistro { get; set; } = DateTime.Now;
+
+    // Relación con la tabla de roles
+    [ForeignKey("Role")]
+    public int? RoleId { get; set; }
+
+    public Role? Role { get; set; }
 }

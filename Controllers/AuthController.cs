@@ -54,7 +54,7 @@ public class AuthController : Controller
                 return View();
             }
 
-            string filename = null;
+            string filename = "";
 
             // Procesar la imagen de perfil si se ha subido
             if (picture != null && picture.Length > 0)
@@ -75,17 +75,25 @@ public class AuthController : Controller
                     await picture.CopyToAsync(stream);
                 }
             }
+            var rolNormal = _context.Role.FirstOrDefault(r => r.Nombre == "Administrador");
+            // Obtener el rol "Normal" var rolNormal = await _context.Role.FirstOrDefault(r => r.Nombre == "Normal");
+            if (rolNormal == null)
+            {
+                ModelState.AddModelError(string.Empty, "El rol 'Normal' no está disponible.");
+                return View();
+            }
 
-            // Crear el nuevo usuario
+            // Crear el nuevo usuario con el rol "Normal"
             var usuario = new Usuario
             {
                 Nombre = userName,
                 Apellido = Apellido,
                 CorreoElectronico = email,
-                Contrasena = _passwordHasher.HashPassword(null, password),
-                FotoPerfil = filename // Guardar el nombre del archivo en la base de datos
-            };
 
+                FotoPerfil = filename, // Guardar el nombre del archivo en la base de datos
+                RoleId = rolNormal.Id // Asignar el rol "Normal" al usuario
+            };
+            usuario.Contrasena = _passwordHasher.HashPassword(usuario, password);
             _context.Usuario.Add(usuario);
             await _context.SaveChangesAsync();
 
@@ -96,22 +104,6 @@ public class AuthController : Controller
             ModelState.AddModelError(string.Empty, $"Error al registrar el usuario: {ex.Message}");
             return View();
         }
-    }
-
-
-    private async Task<string> SavePicture(IFormFile picture)
-    {
-        // Implementa la lógica para guardar la imagen y devolver la ruta o URL
-        // Por ejemplo:
-        var fileName = Path.GetFileName(picture.FileName);
-        var filePath = Path.Combine("wwwroot/images", fileName);
-
-        using (var stream = new FileStream(filePath, FileMode.Create))
-        {
-            await picture.CopyToAsync(stream);
-        }
-
-        return $"/images/{fileName}";
     }
 
     // Método para el login
@@ -129,14 +121,36 @@ public class AuthController : Controller
 
                 if (passwordVerificationResult == PasswordVerificationResult.Success)
                 {
-
+                    // Guardar datos en la sesión
                     HttpContext.Session.SetString("UserEmail", email);
                     HttpContext.Session.SetString("UserName", usuario.Nombre);
                     HttpContext.Session.SetString("UserFoto", usuario.FotoPerfil);
-                    
 
-                    return RedirectToAction("Index", "Home");
+                    // Redirigir según el rol adel usuario
+                    if (usuario.RoleId != null)
+                    {
+                        switch (usuario.RoleId)
+                        {
+                            case 1:
+                                return RedirectToAction("AdminDashboard", "Admin"); // Redirige al panel de administrador
+
+                            case 2:
+                                return RedirectToAction("Index", "Home"); // Redirige al panel de usuario normal
+
+                            case 3:
+                                return RedirectToAction("FabricanteDashboard", "Fabricante"); // Redirige al panel de fabricante
+
+                            default:
+                                return RedirectToAction("Index", "Home"); // Redirige por defecto si el rol no es reconocido
+                        }
+                    }
                 }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View();
+                }
+
             }
 
             ModelState.AddModelError(string.Empty, "Correo o contraseña incorrectos.");
@@ -145,6 +159,15 @@ public class AuthController : Controller
         return View();
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Logout()
+    {
+        // Limpiar la sesión
+        HttpContext.Session.Clear();
 
+        // Redirigir a la página de inicio o de login
+        return RedirectToAction("Index", "Home");
+    }
 
 }

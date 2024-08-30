@@ -12,4 +12,5 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
     public DbSet<Product> Product { get; set; }
     public DbSet<Fabricante> Fabricante { get; set; }
     public DbSet<Usuario> Usuario  { get; set; }
+    public DbSet<Role> Role  { get; set; }
 }

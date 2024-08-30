@@ -12,8 +12,8 @@ using dotnetproyect.Models;
 namespace dotnetproyect.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240829010839_Usermigrate")]
-    partial class Usermigrate
+    [Migration("20240830030106_SeedRoles")]
+    partial class SeedRoles
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -300,6 +300,24 @@ namespace dotnetproyect.Migrations
                     b.ToTable("Product");
                 });
 
+            modelBuilder.Entity("dotnetproyect.Models.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role");
+                });
+
             modelBuilder.Entity("dotnetproyect.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -345,17 +363,16 @@ namespace dotnetproyect.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Rol")
-                        .HasColumnType("longtext");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Telefono")
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
 
-                    b.Property<string>("foto")
-                        .HasColumnType("longtext");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Usuario");
                 });
@@ -422,9 +439,25 @@ namespace dotnetproyect.Migrations
                     b.Navigation("Fabricante");
                 });
 
+            modelBuilder.Entity("dotnetproyect.Models.Usuario", b =>
+                {
+                    b.HasOne("dotnetproyect.Models.Role", "Role")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("dotnetproyect.Models.Fabricante", b =>
                 {
                     b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("dotnetproyect.Models.Role", b =>
+                {
+                    b.Navigation("Usuarios");
                 });
 #pragma warning restore 612, 618
         }

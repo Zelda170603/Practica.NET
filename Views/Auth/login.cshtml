@@ -8,7 +8,7 @@
             <h1 class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Login
             </h1>
-            <form id="loginForm" method="post" action="@Url.Action("Login", "Auth")">
+            <form id="loginForm" method="post" action="@Url.Action("Login", "Auth")" class="flex flex-col gap-4">
                 @Html.AntiForgeryToken()
                 @if (ViewData.ModelState.Values.Any(v => v.Errors.Count > 0))
                 {
