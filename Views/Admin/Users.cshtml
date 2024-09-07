@@ -1,0 +1,71 @@
+@model IEnumerable<dotnetproyect.Models.Usuario>
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "Admin | Usuarios";
+}
+
+<div class="flex flex-col px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <h1 class="text-3xl font-bold mb-6 text-gray-200">Usuarios</h1>
+    <p class="mb-4">
+        <a asp-action="Create" class="text-blue-300 hover:text-blue-800 font-medium">Crear Nuevo</a>
+    </p>
+
+    <div class="overflow-x-auto shadow-md sm:rounded-lg w-full">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Nombre</th>
+                    <th scope="col" class="px-6 py-3">Apellido</th>
+                    <th scope="col" class="px-6 py-3">Correo Electrónico</th>
+                    <th scope="col" class="px-6 py-3">Teléfono</th>
+                    <th scope="col" class="px-6 py-3">Dirección</th>
+                    <th scope="col" class="px-6 py-3">Género</th>
+                    <th scope="col" class="px-6 py-3">Fecha de Nacimiento</th>
+                    <th scope="col" class="px-6 py-3">Foto Perfil</th>
+                    <th scope="col" class="px-6 py-3 text-right">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td class="px-6 py-4">
+                            @Html.DisplayFor(modelItem => item.Apellido)
+                        </td>
+                        <td class="px-6 py-4">
+                            @Html.DisplayFor(modelItem => item.CorreoElectronico)
+                        </td>
+                        <td class="px-6 py-4">
+                            @Html.DisplayFor(modelItem => item.Telefono)
+                        </td>
+                        <td class="px-6 py-4">
+                            @Html.DisplayFor(modelItem => item.Direccion)
+                        </td>
+                        <td class="px-6 py-4">
+                            @Html.DisplayFor(modelItem => item.Genero)
+                        </td>
+                        <td class="px-6 py-4">
+                            @item.FechaNacimiento.ToShortDateString()
+                        </td>
+                        <td class="px-6 py-4">
+                            <img src="~/images/Usuarios/@item.FotoPerfil" alt="Foto de @item.Nombre"
+                                class="w-16 h-16 object-cover rounded-full">
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <a asp-action="Edit" asp-route-id="@item.Id"
+                                class="text-blue-600 hover:text-blue-800">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id"
+                                class="text-blue-600 hover:text-blue-800">Detalles</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id"
+                                class="text-red-600 hover:text-red-800">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -132,7 +132,7 @@ public class AuthController : Controller
                         switch (usuario.RoleId)
                         {
                             case 1:
-                                return RedirectToAction("AdminDashboard", "Admin"); // Redirige al panel de administrador
+                                return RedirectToAction("Index", "Admin"); // Redirige al panel de administrador
 
                             case 2:
                                 return RedirectToAction("Index", "Home"); // Redirige al panel de usuario normal

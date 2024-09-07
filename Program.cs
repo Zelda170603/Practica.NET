@@ -11,7 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(
     new MySqlServerVersion(new Version(10, 4, 32))).EnableDetailedErrors()
 );
 
-// Configuración de Identity con ApplicationUser
+
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<AppDbContext>();
 
@@ -24,9 +24,9 @@ builder.Services.AddDistributedMemoryCache();
 // Configura las sesiones
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(1); // Tiempo de inactividad antes de que la sesión expire
-    options.Cookie.HttpOnly = true; // Configura el cookie como HttpOnly para mayor seguridad
-     options.Cookie.IsEssential = true;
+    options.IdleTimeout = TimeSpan.FromMinutes(30); 
+    options.Cookie.HttpOnly = true; 
+    options.Cookie.IsEssential = true;
 });
 
 

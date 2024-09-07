@@ -1,0 +1,75 @@
+
+@model IEnumerable<dotnetproyect.Models.Product>
+    @{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "Admin | Productos";
+}
+
+<div class="flex flex-col px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">Productos</h1>
+
+    <p class="mb-4">
+        <a asp-action="Create" class="text-blue-600 hover:text-blue-800 font-medium">Crear Nuevo</a>
+    </p>
+
+    <div class="overflow-x-auto shadow-md sm:rounded-lg w-full">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Existencia)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Tipo_prod)
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.Fabricante.nombre) <!-- Mostrar fabricante -->
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        @Html.DisplayNameFor(model => model.foto)
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-right">
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td class="px-6 py-4">
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td class="px-6 py-4">
+                            @Html.DisplayFor(modelItem => item.Existencia)
+                        </td>
+                        <td class="px-6 py-4">
+                            @Html.DisplayFor(modelItem => item.Tipo_prod)
+                        </td>
+                        <td class="px-6 py-4">
+                            @Html.DisplayFor(modelItem => item.Fabricante.nombre) <!-- Mostrar nombre del fabricante -->
+                        </td>
+                        <td class="px-6 py-4">
+                            <img src="~/images/Productos/@item.foto" alt="Imagen de @item.Nombre" class="w-16 h-16 object-cover rounded-full">
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="text-blue-600 hover:text-blue-800">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id" class="text-blue-600 hover:text-blue-800">Detalles</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="text-red-600 hover:text-red-800">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
